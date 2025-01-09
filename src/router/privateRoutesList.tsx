@@ -16,6 +16,10 @@ export const privateRoutes: RouteObject[] = [
         element: <DashboardPage />,
         index: true,
       },
+      {
+        element: <DashboardPage />,
+        path: "/dashboard",
+      },
     ],
   },
 ];

@@ -1,20 +1,20 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import Stack from "@mui/material/Stack";
-import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 import { schema } from "./login.schema";
 import { StyledSignInPaper } from "./StyledSignInPage.styled";
-
-interface IFormData {
-  username: string;
-  password: string;
-}
+import { useCheckAuthMutation } from "../../services/auth/authApi";
+import { yupResolver } from "@hookform/resolvers/yup";
+import type { IFormData } from "./types";
 
 export const SignInPage = () => {
+  const [checkAuth, { isLoading }] = useCheckAuthMutation();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -27,7 +27,10 @@ export const SignInPage = () => {
     },
   });
 
-  const onSubmit = (_data: IFormData) => {};
+  const onSubmit = async (data: IFormData) => {
+    await checkAuth(data);
+    navigate("/dashboard");
+  };
 
   return (
     <>
@@ -62,7 +65,7 @@ export const SignInPage = () => {
                   />
                 )}
               />
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" disabled={isLoading}>
                 Submit
               </Button>
             </Stack>
