@@ -1,8 +1,13 @@
+import type { ReactNode } from "react";
 import { APDrawer, APNavBar, useAPDrawer } from "../../molecules";
 import { navigationPanelItems } from "./constants/navigationPanelItems";
 import { userMenuItems } from "./constants/userMenuItems";
 
-export const NavigationMenu = () => {
+interface INavigationMenu {
+  children?: ReactNode;
+}
+
+export const NavigationMenu = ({ children }: INavigationMenu) => {
   const {
     mobileOpen,
     handleDrawerClose,
@@ -22,7 +27,9 @@ export const NavigationMenu = () => {
             userSettingsMenu={userMenuItems}
           />
         }
-      />
+      >
+        {children}
+      </APDrawer>
     </>
   );
 };

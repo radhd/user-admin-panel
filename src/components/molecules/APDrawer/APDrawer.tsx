@@ -59,19 +59,8 @@ export const APDrawer = ({
           {drawer}
         </StyledAPDrawerPermanent>
       </Box>
-      {/* TODO: CREATE MAIN LAYOUT */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-        }}
-      >
-        <Toolbar />
-        {/* TODO: PUT HERE WEBSITE LAYOUT */}
-        {children}
-      </Box>
+      {/* NEED TO USE TOOLBAR WRAPPED WITH BOX TO SEE CHILDREN CONTENT */}
+      {children}
     </Box>
   );
 };
