@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AuthContext } from "./useAuthContext";
 import { AuthorizedSpaceLayout } from "../components/templates/AuthorizedSpaceLayout/AuthorizedSpaceLayout";
+import { APDrawer } from "../components/molecules/APDrawer/APDrawer";
 
 export const AuthProvider = () => {
   const [isAuth, setAuth] = useState<boolean>(
@@ -10,7 +11,10 @@ export const AuthProvider = () => {
   return (
     <>
       <AuthContext.Provider value={{ isAuth, setAuth }}>
-        <AuthorizedSpaceLayout />
+        <APDrawer>
+          {/* TODO: CREATE LAYOUT FOR WEBSITE */}
+          <AuthorizedSpaceLayout />
+        </APDrawer>
       </AuthContext.Provider>
     </>
   );
