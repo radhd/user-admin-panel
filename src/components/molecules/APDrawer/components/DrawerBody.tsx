@@ -5,7 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import type { IDrawerBodyItems } from "./DrawerBodyItems.types";
 
-interface IDrawerBody {
+export interface IDrawerBody {
   items?: IDrawerBodyItems[];
 }
 
@@ -13,9 +13,9 @@ export const DrawerBody = ({ items = [] }: IDrawerBody) => {
   return (
     <>
       <List>
-        {items.map(({ text, icon }) => (
+        {items.map(({ text, icon, action, disabled }) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={action} disabled={disabled}>
               <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
