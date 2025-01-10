@@ -66,7 +66,7 @@ export const SignInPage = () => {
                 )}
               />
               <Button type="submit" variant="contained" disabled={isLoading}>
-                Submit
+                {isLoading ? "Loading..." : "Submit"}
               </Button>
             </Stack>
           </Box>
