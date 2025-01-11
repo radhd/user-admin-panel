@@ -43,7 +43,11 @@ export const APDrawer = ({
     <Box display="flex">
       <CssBaseline />
       {navigation}
-      <Box component="nav" width={{ sm: DRAWER_WIDTH }} flexShrink={{ sm: 0 }}>
+      <Box
+        component="nav"
+        width={{ sm: DRAWER_WIDTH / 2 }}
+        flexShrink={{ sm: 0 }}
+      >
         <StyledAPDrawerTemporary
           variant="temporary"
           open={mobileOpen}
@@ -59,7 +63,6 @@ export const APDrawer = ({
           {drawer}
         </StyledAPDrawerPermanent>
       </Box>
-      {/* NEED TO USE TOOLBAR WRAPPED WITH BOX TO SEE CHILDREN CONTENT */}
       {children}
     </Box>
   );

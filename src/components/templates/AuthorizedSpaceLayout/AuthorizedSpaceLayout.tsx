@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
+
 import { NavigationMenu } from "../../organisms";
-import Toolbar from "@mui/material/Toolbar";
+import { MainContainerLayout } from "./components/MainContainerLayout";
 
 interface IAuthorizedSpaceLayoutProps {
   children?: ReactNode;
@@ -13,11 +14,9 @@ export const AuthorizedSpaceLayout = ({}: IAuthorizedSpaceLayoutProps) => {
   return (
     <Box display="flex">
       <NavigationMenu>
-        {/* TODO: SITE LAYOUT WITH OUTLET AS CHILDREN*/}
-        <Box component="main">
-          <Toolbar />
+        <MainContainerLayout>
           <Outlet />
-        </Box>
+        </MainContainerLayout>
       </NavigationMenu>
     </Box>
   );
