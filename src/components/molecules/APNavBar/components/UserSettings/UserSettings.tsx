@@ -7,15 +7,9 @@ import { TAnchorElUser } from "./types/TAnchorElUser.types";
 
 interface IUserSettings {
   userSettingsMenu?: IUserSettingsConfig[];
-  avatarSrc?: string;
-  avatarAlt?: string;
 }
 
-export const UserSettings = ({
-  userSettingsMenu,
-  avatarSrc,
-  avatarAlt,
-}: IUserSettings) => {
+export const UserSettings = ({ userSettingsMenu }: IUserSettings) => {
   const [anchorElUser, setAnchorElUser] = useState<TAnchorElUser>(null);
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -28,11 +22,7 @@ export const UserSettings = ({
 
   return (
     <>
-      <AvatarButton
-        handleOpenUserMenu={handleOpenUserMenu}
-        avatarAlt={avatarAlt}
-        avatarSrc={avatarSrc}
-      />
+      <AvatarButton handleOpenUserMenu={handleOpenUserMenu} />
       <UserSettingsMenu
         anchorElUser={anchorElUser}
         userSettingsMenu={userSettingsMenu}
