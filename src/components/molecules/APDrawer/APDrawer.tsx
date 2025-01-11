@@ -43,7 +43,11 @@ export const APDrawer = ({
     <Box display="flex">
       <CssBaseline />
       {navigation}
-      <Box component="nav" width={{ sm: DRAWER_WIDTH }} flexShrink={{ sm: 0 }}>
+      <Box
+        component="nav"
+        width={{ sm: DRAWER_WIDTH / 2 }}
+        flexShrink={{ sm: 0 }}
+      >
         <StyledAPDrawerTemporary
           variant="temporary"
           open={mobileOpen}
@@ -59,19 +63,7 @@ export const APDrawer = ({
           {drawer}
         </StyledAPDrawerPermanent>
       </Box>
-      {/* TODO: CREATE MAIN LAYOUT */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-        }}
-      >
-        <Toolbar />
-        {/* TODO: PUT HERE WEBSITE LAYOUT */}
-        {children}
-      </Box>
+      {children}
     </Box>
   );
 };
