@@ -4,14 +4,21 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { IDrawerBodyItems } from "../../../molecules";
+import BackupTableIcon from "@mui/icons-material/BackupTable";
 
-export const navigationPanelItems: IDrawerBodyItems[] = [
+export const getNavigationPanelItems = (
+  handleDashboardNavigation: () => void,
+  handleTableNavigation: () => void
+) => [
   {
     text: "Dashboard",
     icon: <DashboardIcon />,
-    action: () => console.log("Dashboard clicked"),
+    action: handleDashboardNavigation,
+  },
+  {
+    text: "Table",
+    icon: <BackupTableIcon />,
+    action: handleTableNavigation,
   },
   {
     text: "User Management",
@@ -41,12 +48,6 @@ export const navigationPanelItems: IDrawerBodyItems[] = [
     text: "Help",
     icon: <HelpOutlineIcon />,
     action: () => console.log("Help clicked"),
-    disabled: true,
-  },
-  {
-    text: "Logout",
-    icon: <LogoutIcon />,
-    action: () => console.log("Logout clicked"),
     disabled: true,
   },
 ];

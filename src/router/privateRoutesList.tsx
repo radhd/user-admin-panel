@@ -1,6 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { lazy } from "react";
 import { PrivateRoutes } from "./PrivateRoutes";
+import { APTable } from "@/components/atoms/APTable/APTable";
 
 const DashboardPage = lazy(() =>
   import("../pages/DashboardPage/DashboardPage").then((module) => ({
@@ -19,6 +20,10 @@ export const privateRoutes: RouteObject[] = [
       {
         element: <DashboardPage />,
         path: "/dashboard",
+      },
+      {
+        element: <APTable />,
+        path: "/table",
       },
     ],
   },

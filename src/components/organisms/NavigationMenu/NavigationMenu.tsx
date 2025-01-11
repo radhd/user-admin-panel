@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { APDrawer, APNavBar, useAPDrawer } from "../../molecules";
-import { navigationPanelItems } from "./constants/navigationPanelItems";
+import { getNavigationPanelItems } from "./constants/navigationPanelItems";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "@/services/auth";
@@ -14,11 +14,6 @@ export const NavigationMenu = ({ children }: INavigationMenu) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
-
   const {
     mobileOpen,
     handleDrawerClose,
@@ -26,7 +21,26 @@ export const NavigationMenu = ({ children }: INavigationMenu) => {
     handleDrawerToggle,
   } = useAPDrawer();
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  const handleDashboardNavigation = () => {
+    navigate("/dashboard");
+    handleDrawerClose();
+  };
+
+  const handleTableNavigation = () => {
+    navigate("/table");
+    handleDrawerClose();
+  };
+
   const userMenuItems = createUserMenuItems(handleLogout);
+  const navigationPanelItems = getNavigationPanelItems(
+    handleDashboardNavigation,
+    handleTableNavigation
+  );
 
   return (
     <>
