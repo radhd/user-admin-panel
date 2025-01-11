@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
+import { StyledBox } from "./StyledMainContainerLayout";
 
 interface IMainContainerLayout {
   children: ReactNode;
@@ -9,10 +8,7 @@ interface IMainContainerLayout {
 export const MainContainerLayout = ({ children }: IMainContainerLayout) => {
   return (
     <>
-      <Container component="main">
-        <Toolbar />
-        {children}
-      </Container>
+      <StyledBox component="main">{children}</StyledBox>
     </>
   );
 };
