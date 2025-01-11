@@ -4,7 +4,6 @@ export const schema = yup.object().shape({
   username: yup
     .string()
     .trim()
-    .email("Invalid email format")
     .required("Username is required"),
   password: yup
     .string()

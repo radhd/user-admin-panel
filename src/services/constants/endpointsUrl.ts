@@ -1,3 +1,5 @@
 export enum ENDPOINTS_URL_ENUM {
-  users = "/users",
+  login = "/auth/login",
+  currentUser = "/auth/me",
+  refreshToken = "/auth/refresh",
 }
