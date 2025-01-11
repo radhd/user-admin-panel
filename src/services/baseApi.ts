@@ -1,10 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { INVALIDATES_TAGS_ENUM } from "./constants/invalidatesTags";
-import { ENV_CONFIGURATION } from "../constants/api/envConfiguration";
+import { baseQueryWithReauth } from "./baseQueryWithReauth";
 
 export const baseApi = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: ENV_CONFIGURATION.baseApiUrl }),
+  baseQuery: baseQueryWithReauth,
   tagTypes: [INVALIDATES_TAGS_ENUM.Auth],
   endpoints: () => ({}),
 });

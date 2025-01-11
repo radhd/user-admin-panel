@@ -8,12 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "./login.schema";
 import { StyledSignInPaper } from "./StyledSignInPage.styled";
-import { useCheckAuthMutation } from "../../services/auth/authApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { IFormData } from "./types";
+import { useDispatch } from "react-redux";
+import { useLoginUserMutation } from "../../services/auth/authApi";
+import { logout, setCredentials } from "../../services/auth/authState";
 
 export const SignInPage = () => {
-  const [checkAuth, { isLoading }] = useCheckAuthMutation();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     control,
@@ -28,8 +31,15 @@ export const SignInPage = () => {
   });
 
   const onSubmit = async (data: IFormData) => {
-    await checkAuth(data);
-    navigate("/dashboard");
+    try {
+      const { username, password } = data;
+      const response = await loginUser({ username, password }).unwrap();
+      dispatch(setCredentials(response));
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      dispatch(logout());
+    }
   };
 
   return (
@@ -45,7 +55,7 @@ export const SignInPage = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    placeholder="example@example.com"
+                    placeholder="Username"
                     type="email"
                     error={!!errors.username}
                     helperText={errors.username?.message}
