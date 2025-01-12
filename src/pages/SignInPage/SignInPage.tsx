@@ -4,12 +4,10 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { schema } from "./login.schema";
-import { yupResolver } from "@hookform/resolvers/yup";
 import type { IFormData } from "./types";
 import { useDispatch } from "react-redux";
-import { APControlledInput } from "@/components/atoms";
+import { APControlledInput, useAPControlledInput } from "@/components/atoms";
 import { NAVIGATION_PATH } from "@/components/organisms/NavigationMenu";
 import { logout, setCredentials, useLoginUserMutation } from "@/services/auth";
 import { StyledSignInPaper } from "./StyledSignInPage.styled";
@@ -18,16 +16,10 @@ export const SignInPage = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      username: "",
-      password: "",
-    },
+
+  const { control, handleSubmit, errors } = useAPControlledInput(schema, {
+    username: "",
+    password: "",
   });
 
   const onSubmit = async (data: IFormData) => {
