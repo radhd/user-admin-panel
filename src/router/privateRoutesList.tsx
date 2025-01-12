@@ -1,12 +1,9 @@
 import { RouteObject } from "react-router-dom";
-import { lazy } from "react";
 import { PrivateRoutes } from "./PrivateRoutes";
+import { loadPage } from "./utils/loadPage";
 
-const DashboardPage = lazy(() =>
-  import("../pages/DashboardPage/DashboardPage").then((module) => ({
-    default: module.DashboardPage,
-  }))
-);
+const DashboardPage = loadPage("DashboardPage");
+const UsersManagementPage = loadPage("UsersManagementPage");
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -19,6 +16,10 @@ export const privateRoutes: RouteObject[] = [
       {
         element: <DashboardPage />,
         path: "/dashboard",
+      },
+      {
+        element: <UsersManagementPage />,
+        path: "/users",
       },
     ],
   },

@@ -1,10 +1,8 @@
 import type { ReactNode } from "react";
-import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import type { DrawerProps } from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
-import { DRAWER_WIDTH } from "./constants";
 import { DrawerBody } from "./components/DrawerBody";
 import {
   StyledAPDrawerPermanent,
@@ -40,30 +38,24 @@ export const APDrawer = ({
   );
 
   return (
-    <Box display="flex">
+    <>
       <CssBaseline />
       {navigation}
-      <Box
-        component="nav"
-        width={{ sm: DRAWER_WIDTH / 2 }}
-        flexShrink={{ sm: 0 }}
+      <StyledAPDrawerTemporary
+        variant="temporary"
+        open={mobileOpen}
+        onTransitionEnd={handleDrawerTransitionEnd}
+        onClose={handleDrawerClose}
+        ModalProps={{
+          keepMounted: true,
+        }}
       >
-        <StyledAPDrawerTemporary
-          variant="temporary"
-          open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          {drawer}
-        </StyledAPDrawerTemporary>
-        <StyledAPDrawerPermanent variant="permanent" open>
-          {drawer}
-        </StyledAPDrawerPermanent>
-      </Box>
+        {drawer}
+      </StyledAPDrawerTemporary>
+      <StyledAPDrawerPermanent variant="permanent" open>
+        {drawer}
+      </StyledAPDrawerPermanent>
       {children}
-    </Box>
+    </>
   );
 };
