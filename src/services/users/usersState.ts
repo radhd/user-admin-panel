@@ -1,16 +1,8 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: number;
-  age: number;
-  role: string;
-}
+import type { ITransformedUserResponse } from "./types";
 
 interface UsersState {
-  users: User[];
+  users: ITransformedUserResponse[];
 }
 
 const initialState: UsersState = {
@@ -21,7 +13,7 @@ const usersSlice = createSlice({
   name: "Users",
   initialState,
   reducers: {
-    setUsers: (state, action: PayloadAction<User[]>) => {
+    setUsers: (state, action: PayloadAction<ITransformedUserResponse[]>) => {
       state.users = action.payload;
     },
     // TODO: FILTERS ADDITIONAL TASK

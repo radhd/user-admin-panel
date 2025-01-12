@@ -3,7 +3,7 @@ import { PrivateRoutes } from "./PrivateRoutes";
 import { loadPage } from "./utils/loadPage";
 
 const DashboardPage = loadPage("DashboardPage");
-const TablePage = loadPage("TablePage");
+const UsersManagementPage = loadPage("UsersManagementPage");
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -18,7 +18,7 @@ export const privateRoutes: RouteObject[] = [
         path: "/dashboard",
       },
       {
-        element: <TablePage />,
+        element: <UsersManagementPage />,
         path: "/table",
       },
     ],

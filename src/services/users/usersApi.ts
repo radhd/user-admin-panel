@@ -1,12 +1,13 @@
 import { baseApi } from "../baseApi";
 import { ENDPOINTS_URL_ENUM } from "../constants/endpointsUrl";
+import type { IUsersApiResponse } from "@/services/users/types";
 
 export const usersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllUsers: builder.query({
       query: () => ENDPOINTS_URL_ENUM.getAllUsers,
-      transformResponse: (response) => ({
-        transformed: response.users.map((user: any) => ({
+      transformResponse: (response: IUsersApiResponse) => ({
+        transformed: response.users.map((user) => ({
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
