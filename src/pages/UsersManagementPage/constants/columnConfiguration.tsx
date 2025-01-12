@@ -1,6 +1,7 @@
 import { IColumnConfiguration } from "@/components/molecules/APTable/IAPTable.types";
 import { ITransformedUserResponse } from "@/services/users/types";
-import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const columns: IColumnConfiguration<ITransformedUserResponse>[] = [
   {
@@ -26,6 +27,10 @@ export const columns: IColumnConfiguration<ITransformedUserResponse>[] = [
   {
     id: "edit" as keyof ITransformedUserResponse,
     header: "Edit",
-    component: <Button variant="text">edit</Button>,
+    component: (
+      <IconButton edge="start">
+        <EditIcon fontSize="small" />
+      </IconButton>
+    ),
   },
 ];
