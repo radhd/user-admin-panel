@@ -3,6 +3,7 @@ import { lazy, type FC } from "react";
 type PageModule = {
   DashboardPage: FC;
   TablePage: FC;
+  UsersManagementPage: FC;
 };
 
 export const loadPage = (page: keyof PageModule) =>

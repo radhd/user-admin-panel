@@ -19,7 +19,7 @@ export const privateRoutes: RouteObject[] = [
       },
       {
         element: <UsersManagementPage />,
-        path: "/table",
+        path: "/users",
       },
     ],
   },
