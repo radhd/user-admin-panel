@@ -24,19 +24,24 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export const APTable = () => {
+export const APTableHead = ({ columns }) => {
+  return (
+    <TableHead>
+      <TableRow>
+        {columns &&
+          columns.map((column) => (
+            <TableCell key={column.id}>{column.header}</TableCell>
+          ))}
+      </TableRow>
+    </TableHead>
+  );
+};
+
+export const APTable = ({ columns }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
+        <APTableHead columns={columns} />
         <TableBody>
           {rows.map((row) => (
             <TableRow
