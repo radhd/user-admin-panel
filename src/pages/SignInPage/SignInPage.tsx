@@ -13,6 +13,7 @@ import type { IFormData } from "./types";
 import { useDispatch } from "react-redux";
 import { useLoginUserMutation } from "../../services/auth/authApi";
 import { logout, setCredentials } from "../../services/auth/authState";
+import { NAVIGATION_PATH } from "@/components/organisms/NavigationMenu/constants/navigationPath";
 
 export const SignInPage = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
@@ -35,7 +36,7 @@ export const SignInPage = () => {
       const { username, password } = data;
       const response = await loginUser({ username, password }).unwrap();
       dispatch(setCredentials(response));
-      navigate("/dashboard");
+      navigate(NAVIGATION_PATH.dashboard);
     } catch (error) {
       console.error(error);
       dispatch(logout());
