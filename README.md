@@ -84,3 +84,17 @@ import { theme } from "./helpers/theme/theme";
   <Router />
 </ThemeProvider>;
 ```
+
+## Used data
+
+Dummy json was used for query. For more information: https://dummyjson.com/docs
+
+## Authentication
+
+To authenticate into the app, we can use any username and password provided by: https://dummyjson.com/users
+
+## Live web site
+
+For demo purposes https://render.com/ was used.
+
+Live site link: https://user-admin-panel.onrender.com/
