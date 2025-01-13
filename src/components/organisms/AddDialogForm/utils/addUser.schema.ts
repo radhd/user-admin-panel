@@ -16,6 +16,6 @@ export const schema = yup.object().shape({
     .required("Age is required"),
   role: yup
     .mixed()
-    .oneOf(["admin", "user", "manager"], "Invalid role")
+    .oneOf(["admin", "user", "moderator"], "Invalid role")
     .required("Role is required"),
 });

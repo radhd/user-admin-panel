@@ -1,6 +1,7 @@
 import { baseApi } from "../baseApi";
 import { ENDPOINTS_URL_ENUM } from "../constants/endpointsUrl";
 import type { IUsersApiResponse } from "@/services/users/types";
+import type { IAddUserResponse, IAddUserRequest } from "./types/addUser.types";
 
 export const usersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +19,15 @@ export const usersApi = baseApi.injectEndpoints({
         raw: response.users,
       }),
     }),
+
+    addUser: builder.mutation<IAddUserResponse, IAddUserRequest>({
+      query: (newUser) => ({
+        url: ENDPOINTS_URL_ENUM.addUser,
+        method: "POST",
+        body: newUser,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllUsersQuery } = usersApi;
+export const { useGetAllUsersQuery, useAddUserMutation } = usersApi;
