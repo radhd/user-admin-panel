@@ -7,6 +7,7 @@ import type {
   FieldValues,
   Resolver,
   UseFormHandleSubmit,
+  UseFormReset,
 } from "react-hook-form";
 import type { AnyObjectSchema, InferType } from "yup";
 
@@ -14,6 +15,7 @@ export type TUseAPControlledInputReturn<T extends FieldValues> = {
   control: Control<T>;
   handleSubmit: UseFormHandleSubmit<T>;
   errors: FieldErrors<T>;
+  reset: UseFormReset<T>;
 };
 
 export const useAPControlledInput = <
@@ -27,10 +29,11 @@ export const useAPControlledInput = <
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TFieldValues>({
     resolver: yupResolver(schema) as Resolver<TFieldValues>,
     defaultValues,
   });
 
-  return { control, handleSubmit, errors };
+  return { control, handleSubmit, errors, reset };
 };

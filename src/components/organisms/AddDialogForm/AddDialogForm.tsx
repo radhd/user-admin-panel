@@ -1,71 +1,114 @@
-import * as React from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { APFab } from "@/components/atoms";
+import { APControlledInput, APFab } from "@/components/atoms";
 import AddIcon from "@mui/icons-material/Add";
+import MenuItem from "@mui/material/MenuItem";
+import { USER_ROLES } from "./constants/userRoles";
+import { capitalizeString } from "@/utils";
+import { useDialogForm } from "./hooks/useDialogForm";
 
 export const AddDialogForm = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const formJson = Object.fromEntries((formData as any).entries());
-    const email = formJson.email;
-    console.log(email);
-    handleClose();
-  };
+  const {
+    handleClickOpen,
+    open,
+    handleClose,
+    handleSubmit,
+    onSubmit,
+    control,
+    errors,
+  } = useDialogForm();
 
   return (
-    <React.Fragment>
+    <>
       <APFab onClick={handleClickOpen}>
         <AddIcon fontSize="small" />
       </APFab>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: "form",
-          onSubmit: handleSubmit,
-        }}
-      >
-        <DialogTitle>Add User</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
-        </DialogActions>
+      <Dialog open={open} onClose={handleClose}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <DialogTitle>Add User</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To add user please fill all the required fields.
+            </DialogContentText>
+            <APControlledInput
+              autoFocus
+              control={control}
+              name="firstName"
+              placeholder="First name"
+              type="text"
+              variant="standard"
+              margin="dense"
+              fullWidth
+              error={!!errors.firstName}
+              helperText={errors.firstName?.message}
+            />
+            <APControlledInput
+              autoFocus
+              control={control}
+              name="lastName"
+              placeholder="Last name"
+              type="text"
+              variant="standard"
+              margin="dense"
+              fullWidth
+              error={!!errors.firstName}
+              helperText={errors.firstName?.message}
+            />
+            <APControlledInput
+              autoFocus
+              control={control}
+              name="email"
+              placeholder="example@example.com"
+              type="email"
+              variant="standard"
+              margin="dense"
+              fullWidth
+              error={!!errors.firstName}
+              helperText={errors.firstName?.message}
+            />
+            <APControlledInput
+              autoFocus
+              control={control}
+              name="age"
+              placeholder="User age"
+              type="number"
+              variant="standard"
+              margin="dense"
+              fullWidth
+              error={!!errors.firstName}
+              helperText={errors.firstName?.message}
+            />
+            <APControlledInput
+              autoFocus
+              control={control}
+              defaultValue="User"
+              fullWidth
+              name="role"
+              variant="standard"
+              margin="dense"
+              select
+              label="Select Role"
+              children={USER_ROLES.map((role) => (
+                <MenuItem key={role.value} value={role.value}>
+                  {capitalizeString(role.value)}
+                </MenuItem>
+              ))}
+              error={!!errors.firstName}
+              helperText={errors.firstName?.message}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit">Add user</Button>
+          </DialogActions>
+        </Box>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 };
