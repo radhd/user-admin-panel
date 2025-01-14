@@ -15,7 +15,7 @@ export const DialogFormActions = ({
   return (
     <DialogActions>
       <Button onClick={handleClose}>Cancel</Button>
-      <Button type="submit">Add user</Button>
+      <Button type="submit">Submit</Button>
       <Backdrop open={isLoading} onClick={handleClose}>
         <CircularProgress color="inherit" />
       </Backdrop>

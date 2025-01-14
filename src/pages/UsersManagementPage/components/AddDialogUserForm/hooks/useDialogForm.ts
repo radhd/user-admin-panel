@@ -1,22 +1,13 @@
-import { useState } from "react";
-import { USER_ADD_FORM_DEFAULT_VALUES } from "../constants/userDefaultFormValues";
-import { schema } from "../utils";
-import { useAPControlledInput } from "@/components/atoms";
+import { USER_ADD_FORM_DEFAULT_VALUES } from "../../../../../components/organisms/AddDialogForm/constants/userDefaultFormValues";
+import { schema } from "../../../../../components/organisms/AddDialogForm/utils";
+import { useAPControlledInput, useAPDialog } from "@/components/atoms";
 import { useAddUserMutation } from "@/services";
-import { TFormData } from "../TFormData.types";
+import { TFormData } from "../../../../../components/organisms/AddDialogForm/TFormData.types";
 
 export const useDialogForm = () => {
-  const [open, setOpen] = useState(false);
   const [addUser, { isLoading, isSuccess, reset: resetMutation }] =
     useAddUserMutation();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const { open, handleClickOpen, handleClose } = useAPDialog();
 
   const handleSnackbarClose = (
     _event?: React.SyntheticEvent | Event,
@@ -54,6 +45,7 @@ export const useDialogForm = () => {
     errors,
     isLoading,
     isSuccess,
+    reset,
     handleSnackbarClose,
   };
 };
