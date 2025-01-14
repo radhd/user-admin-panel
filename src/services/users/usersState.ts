@@ -23,8 +23,16 @@ const usersSlice = createSlice({
     clearUsers: (state) => {
       state.users = [];
     },
+    updateUser: (state, action: PayloadAction<ITransformedUserResponse>) => {
+      const index = state.users.findIndex(
+        (user) => user.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.users[index] = action.payload;
+      }
+    },
   },
 });
 
-export const { setUsers, clearUsers } = usersSlice.actions;
+export const { setUsers, clearUsers, updateUser } = usersSlice.actions;
 export default usersSlice.reducer;

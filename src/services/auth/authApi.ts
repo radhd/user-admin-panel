@@ -23,6 +23,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: { refreshToken },
       }),
+      invalidatesTags: [INVALIDATES_TAGS_ENUM.Auth],
     }),
   }),
 });

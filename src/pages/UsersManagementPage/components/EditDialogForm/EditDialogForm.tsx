@@ -6,6 +6,7 @@ import { APDialogForm } from "@/components/organisms";
 import { EditDialogUserForm } from "./EditDialogUserForm";
 import { userEditSchema } from "./userEditSchema.schema";
 import type { IRow } from "./types";
+import { useUpdateUserMutation } from "@/services/users/usersApi";
 
 export interface IEditDialogForm {
   row: IRow;
@@ -13,10 +14,12 @@ export interface IEditDialogForm {
 
 export const EditDialogForm = ({ row }: IEditDialogForm) => {
   const { open, handleClickOpen, handleClose } = useAPDialog();
+  const [updateUser, { isLoading, isSuccess, reset: resetMutation }] =
+    useUpdateUserMutation();
 
   const defaultFormValues = { ...row, age: row.age.toString() };
 
-  const { control, handleSubmit, errors, reset } = useAPControlledInput(
+  const { control, handleSubmit, errors } = useAPControlledInput(
     userEditSchema,
     defaultFormValues
   );
@@ -28,11 +31,16 @@ export const EditDialogForm = ({ row }: IEditDialogForm) => {
     if (reason === "clickaway") {
       return;
     }
+    resetMutation();
   };
 
   const onSubmit = async (data: IRow) => {
-    console.log(data);
-    reset(defaultFormValues);
+    try {
+      await updateUser({ ...data, id: row.id }).unwrap();
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formOpener = (
@@ -50,8 +58,8 @@ export const EditDialogForm = ({ row }: IEditDialogForm) => {
       onSubmit={onSubmit}
       control={control}
       errors={errors}
-      isLoading={false}
-      isSuccess={false}
+      isLoading={isLoading}
+      isSuccess={isSuccess}
       handleSnackbarClose={handleSnackbarClose}
       dialogTitle="Edit user"
       dialogContentText="To edit user please change required fields"

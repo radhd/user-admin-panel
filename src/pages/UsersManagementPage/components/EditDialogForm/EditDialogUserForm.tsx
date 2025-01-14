@@ -11,26 +11,29 @@ interface IAddDialogUserForm {
 export const EditDialogUserForm = ({ control, errors }: IAddDialogUserForm) => {
   return (
     <>
-      {EDIT_FORM_FIELDS.map((field) => (
-        <APControlledInput
-          key={field.name}
-          control={control}
-          name={field.name}
-          id={`user-form-${field.name}`}
-          type={field.type}
-          label={field.label}
-          variant="standard"
-          margin="dense"
-          fullWidth
-          error={!!errors[field.name]}
-          helperText={errors[field.name]?.message}
-          slotProps={{
-            htmlInput: {
-              "aria-label": field.label,
-            },
-          }}
-        />
-      ))}
+      {EDIT_FORM_FIELDS.map((field) => {
+        const errorMessage = errors[field.name]?.message;
+        return (
+          <APControlledInput
+            key={field.name}
+            control={control}
+            name={field.name}
+            id={`user-form-${field.name}`}
+            type={field.type}
+            label={field.label}
+            variant="standard"
+            margin="dense"
+            fullWidth
+            error={!!errors[field.name]}
+            helperText={typeof errorMessage === "string" ? errorMessage : null}
+            slotProps={{
+              htmlInput: {
+                "aria-label": field.label,
+              },
+            }}
+          />
+        );
+      })}
     </>
   );
 };
