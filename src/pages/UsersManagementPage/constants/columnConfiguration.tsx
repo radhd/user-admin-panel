@@ -1,6 +1,6 @@
 import { IColumnConfiguration } from "@/components/molecules/APTable/IAPTable.types";
 import { ITransformedUserResponse } from "@/services/users/types";
-import { EditDialogForm } from "../components/EditDialogForm";
+import { EditDialogForm } from "../components/EditDialogForm/EditDialogForm";
 
 export const columns: IColumnConfiguration<ITransformedUserResponse>[] = [
   {
@@ -26,8 +26,12 @@ export const columns: IColumnConfiguration<ITransformedUserResponse>[] = [
   {
     id: "edit" as keyof ITransformedUserResponse,
     header: "Edit",
-    component: ({ rowData }: { rowData: ITransformedUserResponse }) => (
-      <EditDialogForm row={rowData} />
-    ),
+    component: ({ rowData }: { rowData: ITransformedUserResponse }) => {
+      const sanitizedRowData = {
+        ...rowData,
+        age: String(rowData.age),
+      };
+      return <EditDialogForm row={sanitizedRowData} />;
+    },
   },
 ];
