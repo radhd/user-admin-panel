@@ -12,7 +12,7 @@ export const APTableBody = ({ rows, columns }: IAPTableBody) => {
             <TableCell key={column.id}>
               {column.component
                 ? typeof column.component === "function"
-                  ? column.component({ children: row[column.id] })
+                  ? column.component({ rowData: row })
                   : column.component
                 : row[column.id]}
             </TableCell>
