@@ -4,3 +4,4 @@ export { useAPControlledInput } from "./APControlledInput/hooks/useAPControlledI
 export { APDialog } from "./APDialog/APDialog";
 export { useAPDialog } from "./APDialog/hooks/useAPDialog";
 export { APSnackbar } from "./APSnackbar/APSnackbar";
+export { APCircularProgress } from "./APCircularProgress/APCircularProgress";
