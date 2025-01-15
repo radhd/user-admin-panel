@@ -1,6 +1,6 @@
 import { APControlledInput } from "@/components/atoms";
 import type { Control, FieldErrors } from "react-hook-form";
-import type { IRow } from "./types";
+import type { IRow } from "../../types/types";
 import { EDIT_FORM_FIELDS } from "./constants/editFormFields";
 
 interface IAddDialogUserForm {

@@ -20,9 +20,6 @@ const usersSlice = createSlice({
     filterAdminUsers: (state) => {
       state.users = state.users.filter((user) => user.role === "admin");
     },
-    clearUsers: (state) => {
-      state.users = [];
-    },
     updateUser: (state, action: PayloadAction<ITransformedUserResponse>) => {
       const index = state.users.findIndex(
         (user) => user.id === action.payload.id
@@ -31,8 +28,11 @@ const usersSlice = createSlice({
         state.users[index] = action.payload;
       }
     },
+    deleteUser: (state, action: PayloadAction<number>) => {
+      state.users = state.users.filter((user) => user.id !== action.payload);
+    },
   },
 });
 
-export const { setUsers, clearUsers, updateUser } = usersSlice.actions;
+export const { setUsers, deleteUser, updateUser } = usersSlice.actions;
 export default usersSlice.reducer;

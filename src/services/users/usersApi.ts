@@ -5,7 +5,8 @@ import type {
   IUsersApiResponse,
 } from "@/services/users/types";
 import type { IAddUserResponse, IAddUserRequest } from "./types/addUser.types";
-import { setUsers, updateUser } from "./usersState";
+import { deleteUser, setUsers, updateUser } from "./usersState";
+import { IDeleteUserResponse } from "./types/IDeleteResponse";
 
 export const usersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -53,6 +54,22 @@ export const usersApi = baseApi.injectEndpoints({
       },
       // invalidatesTags: [INVALIDATES_TAGS_ENUM.Users],
     }),
+
+    deleteUser: builder.mutation<IDeleteUserResponse, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS_URL_ENUM.getAllUsers}/${id}`,
+        method: "DELETE",
+      }),
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(deleteUser(id));
+        } catch (error) {
+          console.error("Failed to delete user:", error);
+        }
+      },
+      // invalidatesTags: [INVALIDATES_TAGS_ENUM.Users],
+    }),
   }),
 });
 
@@ -60,4 +77,5 @@ export const {
   useGetAllUsersQuery,
   useAddUserMutation,
   useUpdateUserMutation,
+  useDeleteUserMutation,
 } = usersApi;
