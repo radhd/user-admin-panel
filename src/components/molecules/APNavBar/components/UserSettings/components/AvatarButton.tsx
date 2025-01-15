@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { IUser } from "./IUser.types";
+import { APCircularProgress } from "@/components/atoms";
 
 interface IAvatarButton {
   handleOpenUserMenu: (event: MouseEvent<HTMLElement>) => void;
@@ -20,7 +21,7 @@ export const AvatarButton = ({ handleOpenUserMenu }: IAvatarButton) => {
   }, []);
 
   if (!user) {
-    return <p>Loading...</p>;
+    return <APCircularProgress />;
   }
   return (
     <Box ml="auto">

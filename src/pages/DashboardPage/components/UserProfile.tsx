@@ -1,17 +1,20 @@
+import Box from "@mui/material/Box";
 import { useGetCurrentUserQuery } from "../../../services/auth/authApi";
+import Typography from "@mui/material/Typography";
+import { APCircularProgress } from "@/components/atoms";
 
 export const UserProfile = () => {
   const { data: user, isLoading, error } = useGetCurrentUserQuery({});
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <APCircularProgress />;
   if (error) return <p>Error fetching user profile data</p>;
 
   return (
-    <div>
-      <h1>
+    <Box>
+      <Typography variant="h3">
         Welcome, {user.firstName} {user.lastName}
-      </h1>
-      <p>Email: {user.email}</p>
-    </div>
+      </Typography>
+      <Typography variant="body1">Email: {user.email}</Typography>
+    </Box>
   );
 };

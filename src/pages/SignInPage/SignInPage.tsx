@@ -57,7 +57,12 @@ export const SignInPage = () => {
                 error={!!errors.password}
                 helperText={errors.password?.message}
               />
-              <Button type="submit" variant="contained" disabled={isLoading}>
+              <Button
+                color="primary"
+                type="submit"
+                variant="contained"
+                disabled={isLoading}
+              >
                 {isLoading ? "Loading..." : "Submit"}
               </Button>
             </Stack>

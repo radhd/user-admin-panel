@@ -50,7 +50,7 @@ export const DeleteAlertUser = ({ row }: IRowForForm) => {
             onClick={handleDelete}
             disabled={isLoading}
           >
-            {isLoading ? "Deleting..." : "Delete User"}
+            {isLoading ? "Deleting..." : "Delete"}
           </Button>
         </DialogActions>
       </APDialog>
