@@ -1,4 +1,4 @@
-import { IRow } from "../types";
+import { IRow } from "../../../types/types";
 
 export const EDIT_FORM_FIELDS = [
   {

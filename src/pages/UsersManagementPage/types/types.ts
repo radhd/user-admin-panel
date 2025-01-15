@@ -6,3 +6,7 @@ export interface IRow {
   age: string;
   role: string;
 }
+
+export interface IRowForForm {
+  row: IRow;
+}

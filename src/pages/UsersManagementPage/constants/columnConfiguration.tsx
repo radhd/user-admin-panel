@@ -36,7 +36,7 @@ export const columns: IColumnConfiguration<ITransformedUserResponse>[] = [
       return (
         <>
           <EditDialogForm row={sanitizedRowData} />
-          <DeleteAlertUser />
+          <DeleteAlertUser row={sanitizedRowData} />
         </>
       );
     },

@@ -1,47 +1,23 @@
-import type { SyntheticEvent } from "react";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import { useAPControlledInput, useAPDialog } from "@/components/atoms";
 import { APDialogForm } from "@/components/organisms";
 import { EditDialogUserForm } from "./EditDialogUserForm";
-import { userEditSchema } from "./userEditSchema.schema";
-import type { IRow } from "./types";
-import { useUpdateUserMutation } from "@/services/users/usersApi";
+import type { IRowForForm } from "../../types/types";
+import { useEditDialogForm } from "./hooks/useEditDialogForm";
 
-export interface IEditDialogForm {
-  row: IRow;
-}
-
-export const EditDialogForm = ({ row }: IEditDialogForm) => {
-  const { open, handleClickOpen, handleClose } = useAPDialog();
-  const [updateUser, { isLoading, isSuccess, reset: resetMutation }] =
-    useUpdateUserMutation();
-
-  const defaultFormValues = { ...row, age: row.age.toString() };
-
-  const { control, handleSubmit, errors } = useAPControlledInput(
-    userEditSchema,
-    defaultFormValues
-  );
-
-  const handleSnackbarClose = (
-    _event?: SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    resetMutation();
-  };
-
-  const onSubmit = async (data: IRow) => {
-    try {
-      await updateUser({ ...data, id: row.id }).unwrap();
-      handleClose();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const EditDialogForm = ({ row }: IRowForForm) => {
+  const {
+    handleClickOpen,
+    open,
+    handleClose,
+    handleSubmit,
+    onSubmit,
+    control,
+    errors,
+    isLoading,
+    isSuccess,
+    handleSnackbarClose,
+  } = useEditDialogForm({ row });
 
   const formOpener = (
     <IconButton onClick={handleClickOpen} edge="start">
